@@ -2,17 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Artist Marketplace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwork Listings | Artist Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to the Artist Marketplace</h1>
-    <h2>Artwork Listings</h2>
-    <ul>
-        {% for artwork in artworks %}
-            <li>{{ artwork.title }} - ${{ artwork.price }}</li>
-        {% empty %}
-            <li>No artworks available.</li>
-        {% endfor %}
-    </ul>
+    <header>
+        <h1>Explore Our Artwork Marketplace</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'submit_artwork' %}">Submit Artwork</a></li>
+                <li><a href="{% url 'submit_commission' %}">Request a Commission</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="artwork-listings">
+            <h2>Artwork Listings</h2>
+            <ul class="artwork-items">
+                    <li class="artwork-item">
+                        <h3>{{ artwork.title }}</h3>
+                        <p>Artist: {{ artwork.artist }}</p>
+                        <p>Price: ${{ artwork.price }}</p>
+                        <a href="{% url 'artwork_detail' artwork.id %}" class="view-details">View Details</a>
+                    </li>
+                
+                    <li class="no-artworks">No artworks available at the moment. Check back soon!</li>
+                
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Artist Marketplace. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'terms' %}">Terms of Service</a></li>
+        </ul>
+    </footer>
 </body>
 </html>
